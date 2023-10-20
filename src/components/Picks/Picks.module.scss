@@ -1,0 +1,36 @@
+@import '../../styles/styles.module.scss';
+
+.Picks {
+    .Pick {
+        margin: 10px 0;
+
+        .Numbers {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 5px 0;
+
+            .Char {
+                width: 30px;
+                border-radius: 20px;
+                padding: 2px 8px;
+                text-align: center;
+                color: $text-color;
+                margin: 0 2px;
+            }
+
+            .WinningNumber {
+                border: 0.5px solid $winning-number;
+                background-color: $winning-number;
+                color: $number-color;
+            }
+
+            .SpecialWinningNumber {
+                border: 0.5px solid $special-number;
+            }
+        }
+
+        .Badge {
+            background-color: $info-color !important;
+        }
+    }
+}

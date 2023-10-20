@@ -1,0 +1,5 @@
+@import '../../../styles/styles.module.scss';
+
+.Separator {
+    border-top: 8px dotted $separator-color;
+}

@@ -1,0 +1,61 @@
+@import '../../styles/styles.module.scss';
+
+.Container {
+    background-color: $ticket-color;
+    padding: 20px;
+    border-radius: 10px;
+
+    .Header {
+        color: $mute-color;
+        text-transform: uppercase;
+        text-align: left;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .WinningNumbers {
+        margin-bottom: 20px;
+    }
+
+    .UserNumbers {
+        .Winning {
+        }
+
+        .Losing {
+            width: 100%;
+
+            button {
+                background-color: transparent;
+                color: $mute-color;
+                border: none;
+                padding: 0;
+            }
+
+            div {
+                padding: 0;
+                background-color: transparent !important;
+            }
+        }
+    }
+}
+
+.Char {
+    background-color: $info-color;
+    border-radius: 20px;
+    padding: 0 8px;
+    text-align: center;
+    font-size: large;
+    color: $number-color;
+    font-weight: bold;
+}
+
+.Slot:not(.Slot:last-of-type) {
+    margin-right: 5px;
+}
+
+.Slot:last-of-type {
+    .Char {
+        background-color: $special-number;
+        color: $number-color;
+    }
+}

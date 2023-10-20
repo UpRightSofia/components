@@ -1,0 +1,9 @@
+@import '../../../styles/styles.module.scss';
+
+.Divider {
+    background-color: $mute-color;
+    display: block;
+    height: 1px;
+    width: 100%;
+    opacity: 0.4;
+}
