@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, useAccordionButton } from 'react-bootstrap'
+import { useAccordionButton } from 'react-bootstrap'
 
 function CustomToggle({
     children,
@@ -18,11 +18,7 @@ function CustomToggle({
         decoratedOnClick(e)
     }
 
-    return (
-        <Button variant="primary" onClick={onClickHandler}>
-            {collapsed ? children : valueWhenExpanded}
-        </Button>
-    )
+    return <button onClick={onClickHandler}>{collapsed ? children : valueWhenExpanded}</button>
 }
 
 export default CustomToggle

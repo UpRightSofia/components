@@ -5,22 +5,11 @@
     padding: 20px;
     border-radius: 10px;
 
-    .Header {
-        color: $mute-color;
-        text-transform: uppercase;
-        text-align: left;
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-
     .WinningNumbers {
         margin-bottom: 20px;
     }
 
     .UserNumbers {
-        .Winning {
-        }
-
         .Losing {
             width: 100%;
 
@@ -29,6 +18,8 @@
                 color: $mute-color;
                 border: none;
                 padding: 0;
+                outline: none !important;
+                box-shadow: none;
             }
 
             div {

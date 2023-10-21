@@ -6,6 +6,7 @@ import Spinner from '../common/Spinner/Spinner'
 import Picks from '../Picks/Picks'
 import Separator from '../common/Separator/Separator'
 import CustomToggle from '../common/CustomToggle/CustomToggle'
+import Header from '../common/Header/Header'
 
 const numbers = ['1', '2', '3', '4', '5', '6']
 let userData = [
@@ -57,7 +58,7 @@ const WinningResult = () => {
     return (
         <div className={classes.Container}>
             <div className={classes.WinningNumbers}>
-                <div className={classes.Header}>Winning picks</div>
+                <Header>Winning picks</Header>
                 <div>
                     {numbers.map((number, i) => (
                         <SlotCounter
@@ -74,8 +75,8 @@ const WinningResult = () => {
             </div>
             <Separator />
             <div className={classes.UserNumbers}>
-                <div className={classes.Header}>Your picks</div>
-                <div className={classes.Winning}>
+                <Header>Your picks</Header>
+                <div>
                     {loading && <Spinner />}
                     {!loading && <Picks userPicks={winningPicks} numbers={numbers} />}
                 </div>

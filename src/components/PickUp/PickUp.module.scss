@@ -1,0 +1,138 @@
+@import '../../styles/styles.module.scss';
+
+.Container {
+    background-color: $background-color;
+    padding: 20px;
+    border-radius: 10px;
+
+    .PickedUp {
+        background-color: $ticket-color;
+        padding: 10px;
+        border-radius: 5px;
+
+        .ChosenNumbers {
+            .Number {
+                margin: 0 10px;
+                font-weight: bold;
+                color: $text-color;
+            }
+
+            .SelectedSpecial {
+                border: 1.5px solid $special-number;
+                border-radius: 25px;
+                padding: 5px;
+            }
+
+            .SelectedExtraSpecial {
+                border: 1.5px solid $extra-special-number;
+                border-radius: 25px;
+                padding: 5px;
+            }
+
+            .Placeholder {
+                margin: 0 10px;
+                color: rgba($color: $mute-color, $alpha: 0.7);
+                border-bottom: 2px solid $text-color;
+            }
+        }
+    }
+
+    .Confirm {
+        background-color: $ticket-color;
+        border: none;
+        margin: 20px 0;
+        padding: 5px 20px;
+        border-radius: 5px;
+        color: $text-color;
+        font-weight: bold;
+
+        &:disabled {
+            opacity: 0.7;
+        }
+    }
+
+    .ErrorLabel {
+        position: relative;
+        color: $special-number;
+        top: -10px;
+        font-weight: bold;
+    }
+
+    .NumberPool {
+        display: flex;
+        flex-wrap: wrap;
+
+        .Number {
+            color: $number-color;
+            background-color: $lottery-color;
+            width: 30px;
+            border-radius: 20px;
+            padding: 3px 5px;
+            text-align: center;
+            margin: 4px;
+            font-weight: bold;
+        }
+
+        .Selected {
+            background-color: $ticket-color;
+            color: $text-color;
+        }
+
+        .SelectedSpecial {
+            background-color: $special-number;
+            color: $text-color;
+        }
+
+        .SelectedExtraSpecial {
+            background-color: $extra-special-number;
+            color: $text-color;
+        }
+    }
+
+    .Disclaimer {
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            text-align: left;
+            color: $text-color;
+            background-color: $special-number !important;
+            margin-bottom: 0;
+            text-transform: uppercase;
+
+            &:last-of-type {
+                background-color: $extra-special-number !important;
+            }
+        }
+    }
+}
+
+.Menu {
+    background-color: $lottery-color;
+    padding: 20px;
+    border-radius: 10px;
+
+    .Header {
+        color: $number-color;
+    }
+
+    .Separator {
+        border-color: $number-color;
+    }
+
+    button {
+        display: block;
+        background-color: $ticket-color;
+        border: none;
+        margin: 20px auto;
+        padding: 5px 20px;
+        border-radius: 5px;
+        color: $text-color;
+    }
+
+    .RandomButton {
+        background-color: $lottery-color;
+        color: $number-color;
+    }
+}
