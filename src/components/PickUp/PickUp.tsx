@@ -3,25 +3,36 @@ import Header from '../common/Header/Header'
 import Separator from '../common/Separator/Separator'
 import classes from './PickUp.module.scss'
 import { Badge } from 'react-bootstrap'
+import More from '../common/More/More'
+import { TicketsService } from '../../services/tickets'
+import { Ticket, parseTickets } from '../../utils/parseTickets'
 
 let range = {
     min: 1,
-    max: 49,
+    max: 99,
 }
-let maxPicks = 6
+
 let specialNumbers = ['x5', 'x10']
-let chosen = [
-    ['1', '2', '3', '4', '5', '6'],
-    ['11', '12', '13', '14', '15', '16'],
-    ['23', '11', '2', '30', '5', '40'],
-]
-let picksLeft = 3
 
 const PickUp = () => {
     const [selected, setSelected] = useState<number[]>([])
     const [buttonDisabled, setButtonDisabled] = useState(true)
     const [isValidChoice, setIsValidChoice] = useState(true)
     const [userChoice, setUserChoice] = useState(false)
+    const [chosen, setChosen] = useState<number[][]>([])
+    const [picksLeft, setPicksLeft] = useState(0)
+    const [maxPicks, setMaxPicks] = useState(0)
+
+    useEffect(() => {
+        const load = async () => {
+            const res = await TicketsService.getTickets()
+
+            setMaxPicks(res.maximum_tickets)
+            setPicksLeft(res.maximum_tickets - res.tickets.length)
+            setChosen(parseTickets(res.tickets as Ticket[]))
+        }
+        load()
+    }, [])
 
     useEffect(() => {
         const calcButtonDisabled = () => {
@@ -30,7 +41,7 @@ const PickUp = () => {
                 return true
             }
 
-            let str = JSON.stringify(selected.map((number) => number.toString()))
+            let str = JSON.stringify(selected)
             for (const numbers of chosen) {
                 if (JSON.stringify(numbers) === str) {
                     setIsValidChoice(false)
@@ -42,7 +53,7 @@ const PickUp = () => {
             return false
         }
         setButtonDisabled(calcButtonDisabled())
-    }, [selected])
+    }, [selected, maxPicks, chosen])
 
     const numbersHandler = (num: number) => {
         if (selected.includes(num)) {
@@ -55,12 +66,16 @@ const PickUp = () => {
         }
     }
 
-    const userConfirmHandler = () => {
-        // TODO send to server
+    const userConfirmHandler = async () => {
+        await TicketsService.pickNumbers(selected)
         setUserChoice(false)
         setIsValidChoice(true)
         setSelected([])
         setButtonDisabled(true)
+    }
+
+    const pickRandom = async () => {
+        await TicketsService.pickRandom()
     }
 
     const getClassName = (number: number) => {
@@ -81,10 +96,19 @@ const PickUp = () => {
     if (!userChoice) {
         return (
             <div className={classes.Menu}>
-                <Header className={classes.Header}>Picks left: {picksLeft}</Header>
+                <Header className={classes.Header}>{picksLeft} Picks left</Header>
                 <Separator className={classes.Separator} />
                 <button onClick={() => setUserChoice(true)}>Pick up numbers</button>
-                <button className={classes.RandomButton}>Random</button>
+                <button className={classes.RandomButton} onClick={pickRandom}>
+                    Random
+                </button>
+                <More
+                    className={classes.More}
+                    picks={chosen.map((data) => {
+                        return { numbers: data }
+                    })}
+                    specialNumbersCount={specialNumbers.length}
+                />
             </div>
         )
     }

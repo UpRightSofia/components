@@ -1,41 +1,39 @@
-import { Accordion, Card } from 'react-bootstrap'
 import classes from './WinningResult.module.scss'
 import { useEffect, useRef, useState } from 'react'
 import SlotCounter from 'react-slot-counter'
 import Spinner from '../common/Spinner/Spinner'
 import Picks from '../Picks/Picks'
 import Separator from '../common/Separator/Separator'
-import CustomToggle from '../common/CustomToggle/CustomToggle'
 import Header from '../common/Header/Header'
+import More from '../common/More/More'
 
-const numbers = ['1', '2', '3', '4', '5', '6']
+const numbers = [1, 2, 3, 4, 5, 6]
 let userData = [
-    { numbers: ['2', '3', '23', '4', '5', '6'], prize: '12' },
+    { numbers: [2, 3, 23, 4, 5, 6], prize: 12 },
     {
-        numbers: ['1', '13', '12', '32', '44', '2'],
-        prize: '12',
+        numbers: [1, 13, 12, 32, 44, 2],
+        prize: 12,
     },
-    { numbers: ['11', '2', '32', '43', '11', '12'], prize: '12' },
-    { numbers: ['3', '4', '5', '6', '7', '8'], prize: '0' },
+    { numbers: [11, 2, 32, 43, 11, 12], prize: 12 },
+    { numbers: [3, 4, 5, 6, 7, 8], prize: 0 },
     {
-        numbers: ['11', '12', '13', '14', '15', '16'],
-        prize: '0',
+        numbers: [11, 12, 13, 14, 15, 16],
+        prize: 0,
     },
-    { numbers: ['21', '22', '23', '24', '25', '26'], prize: '0' },
+    { numbers: [21, 22, 23, 24, 25, 26], prize: 0 },
 ]
 let specialNumbersCount = 2
 
-const WinningResult = () => {
-    const time = 3
+const WinningResult = ({ time, showLosing }: { time: number; showLosing: boolean }) => {
     const [loading, setLoading] = useState(true)
-    const [winningPicks, setWinningPicks] = useState<{ numbers: string[]; prize: string }[]>([])
-    const [losingPicks, setLosingPicks] = useState<{ numbers: string[]; prize: string }[]>([])
+    const [winningPicks, setWinningPicks] = useState<{ numbers: number[]; prize: number }[]>([])
+    const [losingPicks, setLosingPicks] = useState<{ numbers: number[]; prize: number }[]>([])
     const loadingRef = useRef(loading)
     loadingRef.current = loading
 
     useEffect(() => {
-        const winningPicks = userData.filter((data) => parseInt(data.prize) > 0)
-        const losingPicks = userData.filter((data) => parseInt(data.prize) === 0)
+        const winningPicks = userData.filter((data) => data.prize > 0)
+        const losingPicks = userData.filter((data) => data.prize === 0)
         setWinningPicks(winningPicks)
         setLosingPicks(losingPicks)
 
@@ -80,7 +78,7 @@ const WinningResult = () => {
                 </div>
             </div>
             <Separator />
-            <div className={classes.UserNumbers}>
+            <div>
                 <Header>Your picks</Header>
                 <div>
                     {loading && <Spinner />}
@@ -93,25 +91,15 @@ const WinningResult = () => {
                     )}
                 </div>
 
-                {!loading && (
-                    <Accordion defaultActiveKey="1" className={classes.Losing}>
-                        <Card className="border-0">
-                            <Card.Header className="border-0 bg-white">
-                                <CustomToggle eventKey="0" valueWhenExpanded="Show less">
-                                    Show more
-                                </CustomToggle>
-                            </Card.Header>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    <Picks
-                                        userPicks={losingPicks}
-                                        numbers={numbers}
-                                        specialNumbersCount={specialNumbersCount}
-                                    />
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
+                {showLosing && !loading && (
+                    <More
+                        picks={losingPicks.map((data) => {
+                            return {
+                                numbers: data.numbers,
+                            }
+                        })}
+                        specialNumbersCount={specialNumbersCount}
+                    />
                 )}
             </div>
         </div>

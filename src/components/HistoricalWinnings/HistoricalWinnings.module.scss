@@ -12,11 +12,13 @@
         --bs-table-bg: transparent;
         --bs-table-border-color: $separator-color;
         --bs-table-color: $text-color;
+    }
 
-        .Picks {
-            div {
-                margin: 0;
-            }
-        }
+    .BackButton {
+        background-color: transparent;
+        border: none;
+        color: $mute-color;
+        font-weight: bold;
+        padding: 10px;
     }
 }

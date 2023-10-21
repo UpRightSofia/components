@@ -8,26 +8,6 @@
     .WinningNumbers {
         margin-bottom: 20px;
     }
-
-    .UserNumbers {
-        .Losing {
-            width: 100%;
-
-            button {
-                background-color: transparent;
-                color: $mute-color;
-                border: none;
-                padding: 0;
-                outline: none !important;
-                box-shadow: none;
-            }
-
-            div {
-                padding: 0;
-                background-color: transparent !important;
-            }
-        }
-    }
 }
 
 .Char {
