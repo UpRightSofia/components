@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import classes from './App.module.scss'
 import PickUp from './components/PickUp/PickUp'
-import Stats from './components/Stats/Stats'
 import WinningResult from './components/WinningResult/WinningResult'
 import { ClockFill, HouseFill, PieChartFill, TicketFill, TrophyFill } from 'react-bootstrap-icons'
 import Header from './components/common/Header/Header'
@@ -11,7 +10,6 @@ import HistoricalWinnings from './components/HistoricalWinnings/HistoricalWinnin
 enum PageView {
     HOME,
     PICKUP,
-    STATS,
     WINNING_RESULT,
     HISTORICAL_WINNINGS,
 }
@@ -23,7 +21,7 @@ function App() {
     useEffect(() => {
         const load = async () => {
             const res = await TicketsService.getTickets()
-            setTotalTickets(res.tickets.length)
+            setTotalTickets(res.tickets?.length)
         }
         load()
     }, [])
@@ -43,9 +41,6 @@ function App() {
                     <button className={classes.Btn} onClick={() => setState(PageView.PICKUP)}>
                         <TicketFill />
                     </button>
-                    <button className={classes.Btn} onClick={() => setState(PageView.STATS)}>
-                        <PieChartFill />
-                    </button>
                     <button
                         className={classes.Btn}
                         onClick={() => setState(PageView.HISTORICAL_WINNINGS)}
@@ -64,18 +59,6 @@ function App() {
             return (
                 <div className={classes.App}>
                     <PickUp />
-                    <button
-                        className={[classes.Home, classes.Btn].join(' ')}
-                        onClick={() => setState(PageView.HOME)}
-                    >
-                        <HouseFill />
-                    </button>
-                </div>
-            )
-        case PageView.STATS:
-            return (
-                <div className={classes.App}>
-                    <Stats />
                     <button
                         className={[classes.Home, classes.Btn].join(' ')}
                         onClick={() => setState(PageView.HOME)}

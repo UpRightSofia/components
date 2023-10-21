@@ -6,43 +6,56 @@ import Picks from '../Picks/Picks'
 import Separator from '../common/Separator/Separator'
 import Header from '../common/Header/Header'
 import More from '../common/More/More'
+import { PoolService } from '../../services/pool'
+import { Stat, parseStats } from '../../utils/parseStats'
+import { parseTickets } from '../../utils/parseTickets'
 
-const numbers = [1, 2, 3, 4, 5, 6]
-let userData = [
-    { numbers: [2, 3, 23, 4, 5, 6], prize: 12 },
-    {
-        numbers: [1, 13, 12, 32, 44, 2],
-        prize: 12,
-    },
-    { numbers: [11, 2, 32, 43, 11, 12], prize: 12 },
-    { numbers: [3, 4, 5, 6, 7, 8], prize: 0 },
-    {
-        numbers: [11, 12, 13, 14, 15, 16],
-        prize: 0,
-    },
-    { numbers: [21, 22, 23, 24, 25, 26], prize: 0 },
-]
-let specialNumbersCount = 2
-
-const WinningResult = ({ time, showLosing }: { time: number; showLosing: boolean }) => {
+const WinningResult = ({
+    time,
+    showLosing,
+    poolId,
+}: {
+    time: number
+    showLosing: boolean
+    poolId?: string
+}) => {
     const [loading, setLoading] = useState(true)
-    const [winningPicks, setWinningPicks] = useState<{ numbers: number[]; prize: number }[]>([])
-    const [losingPicks, setLosingPicks] = useState<{ numbers: number[]; prize: number }[]>([])
+    const [winningPicks, setWinningPicks] = useState<Stat[]>([])
+    const [losingPicks, setLosingPicks] = useState<Stat[]>([])
+    const [winningCombo, setWinningCombo] = useState<number[]>([])
+    const [specialNumbersCount, setSpecialNumbersCount] = useState(0)
     const loadingRef = useRef(loading)
     loadingRef.current = loading
 
     useEffect(() => {
-        const winningPicks = userData.filter((data) => data.prize > 0)
-        const losingPicks = userData.filter((data) => data.prize === 0)
         setWinningPicks(winningPicks)
         setLosingPicks(losingPicks)
+
+        const load = async () => {
+            let id = poolId || ''
+            if (!poolId) {
+                const pool = await PoolService.getPool()
+                id = pool.id
+            }
+            const res = await PoolService.getLastWinnings(id)
+
+            const tickets = parseStats(res.tickets)
+            const winningPicks = tickets.nums.filter((data) => data.prize > 0)
+            const losingPicks = tickets.nums.filter((data) => data.prize === 0)
+
+            setWinningPicks(winningPicks)
+            setLosingPicks(losingPicks)
+            setSpecialNumbersCount(tickets.specialNumbersCount)
+            setWinningCombo(parseTickets([res.pool])[0])
+        }
+        load()
 
         const timer = setTimeout(
             () => {
                 setLoading(!loadingRef.current)
             },
             time *
-                Array(numbers.length)
+                Array(winningCombo.length)
                     .fill(1)
                     .reduce((a, b) => a + b, 0) *
                 1000
@@ -50,7 +63,7 @@ const WinningResult = ({ time, showLosing }: { time: number; showLosing: boolean
         return () => {
             clearTimeout(timer)
         }
-    }, [])
+    }, [time])
 
     useEffect(() => {}, [loading])
 
@@ -59,18 +72,18 @@ const WinningResult = ({ time, showLosing }: { time: number; showLosing: boolean
             <div className={classes.WinningNumbers}>
                 <Header>Winning picks</Header>
                 <div>
-                    {numbers.map((number, i) => (
+                    {winningCombo.map((number, i) => (
                         <SlotCounter
                             key={i}
-                            containerClassName={classes.Slot}
-                            value={number}
-                            startValue={'-'}
-                            charClassName={[
-                                classes.Char,
-                                i + specialNumbersCount >= numbers.length
-                                    ? classes.SpecialChar
+                            containerClassName={[
+                                classes.Slot,
+                                i + specialNumbersCount >= winningCombo.length
+                                    ? classes.SpecialSlot
                                     : '',
+                                number > 9 ? classes.TwoDigits : '',
                             ].join(' ')}
+                            value={number}
+                            startValue={'0'}
                             dummyCharacterCount={(i + 1) * 50}
                             duration={(i + 1) * time}
                         />
@@ -85,13 +98,13 @@ const WinningResult = ({ time, showLosing }: { time: number; showLosing: boolean
                     {!loading && (
                         <Picks
                             userPicks={winningPicks}
-                            numbers={numbers}
+                            numbers={winningCombo}
                             specialNumbersCount={specialNumbersCount}
                         />
                     )}
                 </div>
 
-                {showLosing && !loading && (
+                {showLosing && losingPicks.length && !loading && (
                     <More
                         picks={losingPicks.map((data) => {
                             return {

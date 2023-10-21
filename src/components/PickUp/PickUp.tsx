@@ -13,6 +13,7 @@ let range = {
 }
 
 let specialNumbers = ['x5', 'x10']
+const MAX_PICKS = 8
 
 const PickUp = () => {
     const [selected, setSelected] = useState<number[]>([])
@@ -27,7 +28,7 @@ const PickUp = () => {
         const load = async () => {
             const res = await TicketsService.getTickets()
 
-            setMaxPicks(res.maximum_tickets)
+            setMaxPicks(MAX_PICKS)
             setPicksLeft(res.maximum_tickets - res.tickets.length)
             setChosen(parseTickets(res.tickets as Ticket[]))
         }
@@ -102,13 +103,15 @@ const PickUp = () => {
                 <button className={classes.RandomButton} onClick={pickRandom}>
                     Random
                 </button>
-                <More
-                    className={classes.More}
-                    picks={chosen.map((data) => {
-                        return { numbers: data }
-                    })}
-                    specialNumbersCount={specialNumbers.length}
-                />
+                {chosen.length > 0 && (
+                    <More
+                        className={classes.More}
+                        picks={chosen.map((data) => {
+                            return { numbers: data }
+                        })}
+                        specialNumbersCount={specialNumbers.length}
+                    />
+                )}
             </div>
         )
     }
