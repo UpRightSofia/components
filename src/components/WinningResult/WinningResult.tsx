@@ -10,25 +10,26 @@ import Header from '../common/Header/Header'
 
 const numbers = ['1', '2', '3', '4', '5', '6']
 let userData = [
-    { numbers: '125688', prize: '12' },
+    { numbers: ['2', '3', '23', '4', '5', '6'], prize: '12' },
     {
-        numbers: '133689',
+        numbers: ['1', '13', '12', '32', '44', '2'],
         prize: '12',
     },
-    { numbers: '235626', prize: '12' },
-    { numbers: '345678', prize: '0' },
+    { numbers: ['11', '2', '32', '43', '11', '12'], prize: '12' },
+    { numbers: ['3', '4', '5', '6', '7', '8'], prize: '0' },
     {
-        numbers: '567892',
+        numbers: ['11', '12', '13', '14', '15', '16'],
         prize: '0',
     },
-    { numbers: '736223', prize: '0' },
+    { numbers: ['21', '22', '23', '24', '25', '26'], prize: '0' },
 ]
+let specialNumbersCount = 2
 
 const WinningResult = () => {
     const time = 3
     const [loading, setLoading] = useState(true)
-    const [winningPicks, setWinningPicks] = useState<{ numbers: string; prize: string }[]>([])
-    const [losingPicks, setLosingPicks] = useState<{ numbers: string; prize: string }[]>([])
+    const [winningPicks, setWinningPicks] = useState<{ numbers: string[]; prize: string }[]>([])
+    const [losingPicks, setLosingPicks] = useState<{ numbers: string[]; prize: string }[]>([])
     const loadingRef = useRef(loading)
     loadingRef.current = loading
 
@@ -66,7 +67,12 @@ const WinningResult = () => {
                             containerClassName={classes.Slot}
                             value={number}
                             startValue={'-'}
-                            charClassName={classes.Char}
+                            charClassName={[
+                                classes.Char,
+                                i + specialNumbersCount >= numbers.length
+                                    ? classes.SpecialChar
+                                    : '',
+                            ].join(' ')}
                             dummyCharacterCount={(i + 1) * 50}
                             duration={(i + 1) * time}
                         />
@@ -78,7 +84,13 @@ const WinningResult = () => {
                 <Header>Your picks</Header>
                 <div>
                     {loading && <Spinner />}
-                    {!loading && <Picks userPicks={winningPicks} numbers={numbers} />}
+                    {!loading && (
+                        <Picks
+                            userPicks={winningPicks}
+                            numbers={numbers}
+                            specialNumbersCount={specialNumbersCount}
+                        />
+                    )}
                 </div>
 
                 {!loading && (
@@ -91,7 +103,11 @@ const WinningResult = () => {
                             </Card.Header>
                             <Accordion.Collapse eventKey="0">
                                 <Card.Body>
-                                    <Picks userPicks={losingPicks} numbers={numbers} />
+                                    <Picks
+                                        userPicks={losingPicks}
+                                        numbers={numbers}
+                                        specialNumbersCount={specialNumbersCount}
+                                    />
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>

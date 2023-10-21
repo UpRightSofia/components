@@ -12,20 +12,33 @@
             .Char {
                 width: 30px;
                 border-radius: 20px;
-                padding: 2px 8px;
+                padding: 1px 2px;
                 text-align: center;
                 color: $text-color;
                 margin: 0 2px;
             }
 
+            .SpecialNumber {
+                border: 2px solid $special-number;
+
+                &:last-of-type {
+                    border: 2px solid $extra-special-number;
+                }
+            }
+
             .WinningNumber {
-                border: 0.5px solid $winning-number;
+                border: 2px solid $winning-number;
                 background-color: $winning-number;
                 color: $number-color;
             }
 
             .SpecialWinningNumber {
-                border: 0.5px solid $special-number;
+                background-color: $special-number;
+                color: $number-color;
+
+                &:last-of-type:not(:first-child) {
+                    background-color: $extra-special-number;
+                }
             }
         }
 

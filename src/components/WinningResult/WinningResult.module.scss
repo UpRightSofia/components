@@ -42,11 +42,15 @@
 
 .Slot:not(.Slot:last-of-type) {
     margin-right: 5px;
+
+    .SpecialChar {
+        background-color: $special-number;
+        color: $number-color;
+    }
 }
 
 .Slot:last-of-type {
-    .Char {
-        background-color: $special-number;
-        color: $number-color;
+    .SpecialChar {
+        background-color: $extra-special-number;
     }
 }

@@ -1,0 +1,21 @@
+@import '../../styles/styles.module.scss';
+
+.Container {
+    background-color: $ticket-color;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+
+    .Stats {
+        text-align: left;
+        --bs-table-bg: transparent;
+        --bs-table-border-color: $separator-color;
+        --bs-table-color: $text-color;
+
+        .Picks {
+            div {
+                margin: 0;
+            }
+        }
+    }
+}
