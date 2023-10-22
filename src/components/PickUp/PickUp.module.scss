@@ -10,12 +10,14 @@
         background-color: $ticket-color;
         padding: 10px;
         border-radius: 5px;
+        cursor: default;
 
         .ChosenNumbers {
             .Number {
                 margin: 0 5px;
                 font-weight: bold;
                 color: $text-color;
+                cursor: default;
             }
 
             .TwoDigits {
@@ -77,6 +79,7 @@
             text-align: center;
             margin: 4px;
             font-weight: bold;
+            cursor: default;
         }
 
         .Selected {
@@ -130,7 +133,7 @@
         border-color: $number-color;
     }
 
-    >button {
+    > button {
         display: block;
         background-color: $ticket-color;
         border: none;
