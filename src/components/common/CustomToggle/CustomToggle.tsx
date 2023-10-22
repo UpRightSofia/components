@@ -20,7 +20,11 @@ function CustomToggle({
         decoratedOnClick(e)
     }
 
-    return <button onClick={onClickHandler}>{collapsed ? children : valueWhenExpanded}</button>
+    return (
+        <button onClick={onClickHandler}>
+            <span className="fw-bold">{collapsed ? children : valueWhenExpanded}</span>
+        </button>
+    )
 }
 
 export default CustomToggle

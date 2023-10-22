@@ -5,22 +5,24 @@
 }
 
 .App {
+    width: 500px;
+    margin: auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
+    // width: 100vw;
     height: 100%;
     overflow: auto;
     background-color: $background-color;
     padding: 10px;
 
-    >div {
+    > div {
         margin: 10px 0;
     }
 
-    >span {
+    > span {
         color: $ticket-color;
         font-size: 40px;
         font-weight: bold;
