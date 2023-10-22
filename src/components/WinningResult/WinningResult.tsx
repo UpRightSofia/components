@@ -70,12 +70,12 @@ const WinningResult = ({
         }
     })
 
-    useEffect(() => {}, [loading])
+    useEffect(() => { }, [loading])
 
     return (
         <div className={classes.Container}>
             <div className={classes.WinningNumbers}>
-                <Header>Winning picks</Header>
+                <Header className={classes.NumbersText}>Winning numbers</Header>
                 <div>
                     {winningCombo.map((number, i) => (
                         <SlotCounter
@@ -97,7 +97,7 @@ const WinningResult = ({
             </div>
             <Separator />
             <div>
-                <Header>Your picks</Header>
+                <Header className={classes.NumbersText}>Your numbers</Header>
                 <div>
                     {winningPicks.length > 0 ? (
                         <>

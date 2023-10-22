@@ -29,7 +29,7 @@ const More = ({
                         eventKey="0"
                         valueWhenExpanded="Show less"
                     >
-                        Show more
+                        <div className={classes.Text}>Show more</div>
                     </CustomToggle>
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">

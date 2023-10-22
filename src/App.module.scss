@@ -1,5 +1,9 @@
 @import './styles/styles.module.scss';
 
+.Text {
+    font-weight: bold;
+}
+
 .App {
     text-align: center;
     display: flex;
@@ -12,11 +16,11 @@
     background-color: $background-color;
     padding: 10px;
 
-    > div {
+    >div {
         margin: 10px 0;
     }
 
-    > span {
+    >span {
         color: $ticket-color;
         font-size: 40px;
         font-weight: bold;
