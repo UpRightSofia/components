@@ -70,7 +70,7 @@ const WinningResult = ({
         }
     })
 
-    useEffect(() => {}, [loading])
+    useEffect(() => { }, [loading])
 
     return (
         <div className={classes.Container}>
@@ -111,11 +111,14 @@ const WinningResult = ({
                             )}
                         </>
                     ) : (
-                        <Header className="text-center fs-5 mb-0">No winning tickets</Header>
+                        <>
+                            {loading && <Spinner />}
+                            {!loading && <Header className="text-center fs-5 mb-0">No winning tickets</Header>}
+                        </>
                     )}
                 </div>
 
-                {showLosing && losingPicks.length && !loading && (
+                {showLosing && losingPicks.length && !loading ? (
                     <More
                         picks={losingPicks.map((data) => {
                             return {
@@ -124,6 +127,8 @@ const WinningResult = ({
                         })}
                         specialNumbersCount={specialNumbersCount}
                     />
+                ) : (
+                    ''
                 )}
             </div>
         </div>
