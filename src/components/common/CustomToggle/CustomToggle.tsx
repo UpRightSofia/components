@@ -5,12 +5,14 @@ function CustomToggle({
     children,
     eventKey,
     valueWhenExpanded,
+    expanded,
 }: {
     children: any
     eventKey: string
     valueWhenExpanded: string
+    expanded: boolean
 }) {
-    const [collapsed, setCollapsed] = useState(true)
+    const [collapsed, setCollapsed] = useState(!expanded)
     const decoratedOnClick = useAccordionButton(eventKey)
 
     const onClickHandler = (e: any) => {

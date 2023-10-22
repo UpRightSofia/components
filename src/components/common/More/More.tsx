@@ -24,7 +24,11 @@ const More = ({
         >
             <Card className="border-0">
                 <Card.Header className="border-0 bg-white">
-                    <CustomToggle eventKey="0" valueWhenExpanded="Show less">
+                    <CustomToggle
+                        expanded={expanded || false}
+                        eventKey="0"
+                        valueWhenExpanded="Show less"
+                    >
                         Show more
                     </CustomToggle>
                 </Card.Header>
