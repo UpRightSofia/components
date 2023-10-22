@@ -10,6 +10,7 @@
     height: 100%;
     overflow: auto;
     background-color: $background-color;
+    padding: 10px;
 
     > div {
         margin: 10px 0;
@@ -34,7 +35,7 @@
         padding: 5px 20px;
         border-radius: 5px;
         color: $text-color;
-        background-color: rgba($color: $number-color, $alpha: 0.7);
+        background-color: lighten($number-color, 20%);
     }
 
     .Home {

@@ -4,7 +4,7 @@
     background-color: $background-color;
     padding: 20px;
     border-radius: 10px;
-    max-width: 400px;
+    max-width: 450px;
 
     .PickedUp {
         background-color: $ticket-color;
@@ -13,21 +13,25 @@
 
         .ChosenNumbers {
             .Number {
-                margin: 0 10px;
+                margin: 0 5px;
                 font-weight: bold;
                 color: $text-color;
+            }
+
+            .TwoDigits {
+                padding: 7px 8px !important;
             }
 
             .SelectedSpecial {
                 border: 1.5px solid $special-number;
                 border-radius: 25px;
-                padding: 5px;
+                padding: 7px 12px;
             }
 
             .SelectedExtraSpecial {
                 border: 1.5px solid $extra-special-number;
                 border-radius: 25px;
-                padding: 5px;
+                padding: 7px 12px;
             }
 
             .Placeholder {
@@ -137,7 +141,7 @@
 
     .RandomButton {
         background-color: $lottery-color;
-        color: $info-color;
+        color: $text-color;
         border: 1px solid $info-color;
     }
 

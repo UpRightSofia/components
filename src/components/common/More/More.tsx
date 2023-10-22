@@ -7,6 +7,7 @@ const More = ({
     picks,
     specialNumbersCount,
     className,
+    expanded,
 }: {
     picks: {
         numbers: number[]
@@ -14,9 +15,13 @@ const More = ({
     }[]
     specialNumbersCount: number
     className?: string
+    expanded?: boolean
 }) => {
     return (
-        <Accordion defaultActiveKey="1" className={[classes.More, className].join(' ')}>
+        <Accordion
+            defaultActiveKey={expanded ? '0' : '1'}
+            className={[classes.More, className].join(' ')}
+        >
             <Card className="border-0">
                 <Card.Header className="border-0 bg-white">
                     <CustomToggle eventKey="0" valueWhenExpanded="Show less">

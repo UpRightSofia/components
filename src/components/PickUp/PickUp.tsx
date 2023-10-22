@@ -12,7 +12,7 @@ let range = {
     max: 99,
 }
 
-let specialNumbers = ['x5', 'x10']
+let specialNumbers = ['x10', 'x20']
 const MAX_PICKS = 8
 
 const PickUp = () => {
@@ -103,10 +103,14 @@ const PickUp = () => {
             <div className={classes.Menu}>
                 <Header className={classes.Header}>{picksLeft} Picks left</Header>
                 <Separator className={classes.Separator} />
-                <button onClick={() => setUserChoice(true)}>Pick up numbers</button>
-                <button className={classes.RandomButton} onClick={pickRandom}>
-                    Random
-                </button>
+                {picksLeft > 0 && (
+                    <>
+                        <button onClick={() => setUserChoice(true)}>Pick up numbers</button>
+                        <button className={classes.RandomButton} onClick={pickRandom}>
+                            Random
+                        </button>
+                    </>
+                )}
                 {chosen.length > 0 && (
                     <More
                         className={classes.More}
@@ -114,6 +118,7 @@ const PickUp = () => {
                             return { numbers: data }
                         })}
                         specialNumbersCount={specialNumbers.length}
+                        expanded={picksLeft === 0}
                     />
                 )}
             </div>
@@ -128,7 +133,11 @@ const PickUp = () => {
                 <div className={classes.ChosenNumbers}>
                     {selected.map((number) => (
                         <span
-                            className={[classes.Number, getClassName(number)].join(' ')}
+                            className={[
+                                classes.Number,
+                                getClassName(number),
+                                number > 9 ? classes.TwoDigits : '',
+                            ].join(' ')}
                             key={number}
                         >
                             {number}

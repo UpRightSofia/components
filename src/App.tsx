@@ -24,7 +24,7 @@ function App() {
             setTotalTickets(res.tickets?.length)
         }
         load()
-    }, [])
+    }, [state])
 
     const homeView = () => {
         return (
