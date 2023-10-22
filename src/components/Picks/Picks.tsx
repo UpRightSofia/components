@@ -24,13 +24,16 @@ const Picks = (props: {
                                                 props.numbers.length - props.specialNumbersCount
                                                     ? classes.SpecialNumber
                                                     : '',
-                                                // props.numbers[i] === num
-                                                //     ? i >=
-                                                //       props.numbers.length -
-                                                //           props.specialNumbersCount
-                                                //         ? classes.SpecialWinningNumber
-                                                //         : classes.WinningNumber
-                                                //     : '',
+                                                props.numbers.slice(0, 6).includes(num)
+                                                    ? classes.WinningNumber
+                                                    : '',
+                                                props.numbers.slice(6).includes(num)
+                                                    ? i >=
+                                                      props.numbers.length -
+                                                          props.specialNumbersCount
+                                                        ? classes.SpecialWinningNumber
+                                                        : ''
+                                                    : '',
                                             ].join(' ')}
                                         >
                                             {num}

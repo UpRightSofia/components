@@ -43,11 +43,14 @@ const PickUp = () => {
                 return true
             }
 
-            let str = JSON.stringify(selected)
+            const poolNums = selected.slice(0, 6)
             for (const numbers of chosen) {
-                if (JSON.stringify(numbers) === str) {
-                    setIsValidChoice(false)
-                    return true
+                const nums = numbers.slice(0, 6)
+                if (poolNums.every((num) => nums.includes(num))) {
+                    if (selected[6] === numbers[6] && selected[7] === numbers[7]) {
+                        setIsValidChoice(false)
+                        return true
+                    }
                 }
             }
 
