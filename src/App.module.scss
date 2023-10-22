@@ -2,6 +2,7 @@
 
 .Text {
     font-weight: bold;
+    font-size: 16px;
 }
 
 .App {
@@ -22,10 +23,26 @@
         margin: 10px 0;
     }
 
-    > span {
+    // > span {
+    // color: $ticket-color;
+    // font-size: 40px;
+    // font-weight: bold;
+    .Logo {
+        font-family: 'Arial Black', sans-serif;
+        font-size: 36px;
         color: $ticket-color;
-        font-size: 40px;
-        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        padding: 10px;
+        border: 2px solid $ticket-color;
+        border-radius: 5px;
+        background-color: #222;
+        display: inline-block;
+
+        span {
+            display: inline-block;
+            transform: skew(-10deg);
+        }
     }
 
     .Buttons {
@@ -38,6 +55,7 @@
     .Btn {
         border: none;
         margin: 20px auto;
+        font-size: 20px;
         padding: 5px 20px;
         border-radius: 5px;
         color: $text-color;

@@ -29,7 +29,9 @@ function App() {
     const homeView = () => {
         return (
             <div className={classes.App}>
-                <span>LottoLodge</span>
+                <div className={classes.Logo}>
+                    <span>LottoLodge</span>
+                </div>
                 <Header className={classes.Text}>Total tickets {totalTickets}</Header>
                 <div className={classes.Buttons}>
                     <button
