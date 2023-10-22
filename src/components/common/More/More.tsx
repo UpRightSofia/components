@@ -11,7 +11,7 @@ const More = ({
 }: {
     picks: {
         numbers: number[]
-        prize?: number
+        prize?: string
     }[]
     specialNumbersCount: number
     className?: string

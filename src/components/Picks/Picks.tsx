@@ -3,7 +3,7 @@ import Divider from '../common/Divider/Divider'
 import { Badge } from 'react-bootstrap'
 
 const Picks = (props: {
-    userPicks: { numbers: number[]; prize?: number }[]
+    userPicks: { numbers: number[]; prize?: string }[]
     numbers: number[]
     specialNumbersCount: number
 }) => {

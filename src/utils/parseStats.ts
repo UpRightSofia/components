@@ -2,7 +2,7 @@ import { parseTickets } from "./parseTickets";
 
 export interface Stat {
     numbers: number[],
-    prize: number,
+    prize: string,
 }
 
 interface StatsData {
@@ -18,7 +18,7 @@ export const parseStats = (data: StatsData[]) => {
             const { drawn_numbers, small_multiplier, big_multiplier, winnigsE5 } = stats;
             return {
                 numbers: parseTickets([{ drawn_numbers, small_multiplier, big_multiplier }])[0],
-                prize: winnigsE5 / 100000,
+                prize: (winnigsE5 / 100000).toLocaleString(),
             }
         }),
         specialNumbersCount: 2,

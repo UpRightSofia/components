@@ -1,6 +1,6 @@
 export interface Winnings {
     id: string;
-    winnings: number;
+    winnings: string;
     date: Date;
 }
 
@@ -14,7 +14,7 @@ export const parseWinnings = (data: WinningsData[]): Winnings[] => {
     return data.map((item) => {
         return {
             id: item.id,
-            winnings: item.total_win_e5 / 100000,
+            winnings: (item.total_win_e5 / 100000).toLocaleString(),
             date: new Date(item.pool_date),
         }
     })

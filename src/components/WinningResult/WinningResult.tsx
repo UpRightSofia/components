@@ -41,8 +41,8 @@ const WinningResult = ({
             const res = await PoolService.getLastWinnings(id)
 
             const tickets = parseStats(res.tickets)
-            const winningPicks = tickets.nums.filter((data) => data.prize > 0)
-            const losingPicks = tickets.nums.filter((data) => data.prize === 0)
+            const winningPicks = tickets.nums.filter((data) => data.prize !== '0')
+            const losingPicks = tickets.nums.filter((data) => data.prize === '0')
 
             setWinningPicks(winningPicks)
             setLosingPicks(losingPicks)
@@ -70,7 +70,7 @@ const WinningResult = ({
         }
     })
 
-    useEffect(() => { }, [loading])
+    useEffect(() => {}, [loading])
 
     return (
         <div className={classes.Container}>
