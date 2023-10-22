@@ -15,6 +15,7 @@
             .Char {
                 width: 30px;
                 border-radius: 20px;
+                border: solid 1.5px rgba(150, 150, 150, 0.7);
                 padding: 1px 2px;
                 text-align: center;
                 color: $text-color;
@@ -47,7 +48,7 @@
         }
 
         .Badge {
-            background-color: $info-color !important;
+            background-color: $winning-result-color !important;
         }
     }
 }
