@@ -72,7 +72,7 @@ function App() {
         case PageView.WINNING_RESULT:
             return (
                 <div className={classes.App}>
-                    <WinningResult time={0} showLosing={true} />
+                    <WinningResult time={1.5} showLosing={true} />
                     <button
                         className={[classes.Home, classes.Btn].join(' ')}
                         onClick={() => setState(PageView.HOME)}
