@@ -19,6 +19,7 @@ const WinningResult = ({
     showLosing: boolean
     poolId?: string
 }) => {
+    let timer: any
     const [loading, setLoading] = useState(true)
     const [winningPicks, setWinningPicks] = useState<Stat[]>([])
     const [losingPicks, setLosingPicks] = useState<Stat[]>([])
@@ -49,21 +50,25 @@ const WinningResult = ({
             setWinningCombo(parseTickets([res.pool])[0])
         }
         load()
+    }, [])
 
-        const timer = setTimeout(
-            () => {
-                setLoading(!loadingRef.current)
-            },
-            time *
-                Array(winningCombo.length)
-                    .fill(1)
-                    .reduce((a, b) => a + b, 0) *
-                1000
-        )
-        return () => {
-            clearTimeout(timer)
+    useEffect(() => {
+        if (time > 0) {
+            const arr = Array(8)
+                .fill(1)
+                .reduce((a, b) => a + b, 0)
+            const loadingTime = arr * 1000 * time
+
+            const timer = setTimeout(() => {
+                setLoading(() => false)
+            }, loadingTime)
+            return () => {
+                clearTimeout(timer)
+            }
+        } else {
+            setLoading(false)
         }
-    }, [time])
+    })
 
     useEffect(() => {}, [loading])
 

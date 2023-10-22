@@ -70,7 +70,11 @@ function App() {
         case PageView.WINNING_RESULT:
             return (
                 <div className={classes.App}>
+<<<<<<< Updated upstream
                     <WinningResult time={1.5} showLosing={true} />
+=======
+                    <WinningResult time={2} showLosing={true} />
+>>>>>>> Stashed changes
                     <button
                         className={[classes.Home, classes.Btn].join(' ')}
                         onClick={() => setState(PageView.HOME)}
