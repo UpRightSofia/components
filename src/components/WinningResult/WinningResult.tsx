@@ -94,13 +94,19 @@ const WinningResult = ({
             <div>
                 <Header>Your picks</Header>
                 <div>
-                    {loading && <Spinner />}
-                    {!loading && (
-                        <Picks
-                            userPicks={winningPicks}
-                            numbers={winningCombo}
-                            specialNumbersCount={specialNumbersCount}
-                        />
+                    {winningPicks.length > 0 ? (
+                        <>
+                            {loading && <Spinner />}
+                            {!loading && (
+                                <Picks
+                                    userPicks={winningPicks}
+                                    numbers={winningCombo}
+                                    specialNumbersCount={specialNumbersCount}
+                                />
+                            )}
+                        </>
+                    ) : (
+                        <Header className="text-center fs-5 mb-0">No winning tickets</Header>
                     )}
                 </div>
 

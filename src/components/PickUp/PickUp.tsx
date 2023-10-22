@@ -24,14 +24,15 @@ const PickUp = () => {
     const [picksLeft, setPicksLeft] = useState(0)
     const [maxPicks, setMaxPicks] = useState(0)
 
-    useEffect(() => {
-        const load = async () => {
-            const res = await TicketsService.getTickets()
+    const load = async () => {
+        const res = await TicketsService.getTickets()
 
-            setMaxPicks(MAX_PICKS)
-            setPicksLeft(res.maximum_tickets - res.tickets.length)
-            setChosen(parseTickets(res.tickets as Ticket[]))
-        }
+        setMaxPicks(MAX_PICKS)
+        setPicksLeft(res.maximum_tickets - res.tickets.length)
+        setChosen(parseTickets(res.tickets as Ticket[]))
+    }
+
+    useEffect(() => {
         load()
     }, [])
 
@@ -69,6 +70,8 @@ const PickUp = () => {
 
     const userConfirmHandler = async () => {
         await TicketsService.pickNumbers(selected)
+        await load()
+
         setUserChoice(false)
         setIsValidChoice(true)
         setSelected([])
@@ -77,6 +80,7 @@ const PickUp = () => {
 
     const pickRandom = async () => {
         await TicketsService.pickRandom()
+        await load()
     }
 
     const getClassName = (number: number) => {

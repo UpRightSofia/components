@@ -3,6 +3,8 @@
 .More {
     width: 100%;
     min-width: 350px;
+    overflow-y: auto;
+    max-height: 400px;
 
     button {
         background-color: transparent;

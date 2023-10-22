@@ -7,6 +7,10 @@
     overflow-y: auto;
     width: 100%;
 
+    > div {
+        max-height: 400px;
+    }
+
     .Stats {
         text-align: left;
         --bs-table-bg: transparent;

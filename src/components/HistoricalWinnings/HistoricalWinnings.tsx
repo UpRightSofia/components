@@ -33,7 +33,6 @@ const HistoricalWinnings = () => {
     useEffect(() => {
         const load = async () => {
             const res = await WinningsService.getWinnings()
-            console.log('res', res)
             setData(parseWinnings(res as any))
         }
         load()
@@ -52,7 +51,7 @@ const HistoricalWinnings = () => {
 
     return (
         <div className={classes.Container}>
-            <Table className={classes.Stats}>
+            <Table className={classes.Stats} responsive>
                 <thead>
                     <tr>
                         <th>Date</th>

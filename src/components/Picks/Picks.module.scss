@@ -1,6 +1,9 @@
 @import '../../styles/styles.module.scss';
 
 .Picks {
+    overflow-y: auto;
+    max-height: 300px;
+
     .Pick {
         margin: 10px 0;
 
