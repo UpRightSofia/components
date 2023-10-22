@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import classes from './App.module.scss'
 import PickUp from './components/PickUp/PickUp'
 import WinningResult from './components/WinningResult/WinningResult'
-import { ClockFill, HouseFill, PieChartFill, TicketFill, TrophyFill } from 'react-bootstrap-icons'
+import { ClockFill, HouseFill, TicketFill, TrophyFill } from 'react-bootstrap-icons'
 import Header from './components/common/Header/Header'
 import { TicketsService } from './services/tickets'
 import HistoricalWinnings from './components/HistoricalWinnings/HistoricalWinnings'
@@ -70,11 +70,7 @@ function App() {
         case PageView.WINNING_RESULT:
             return (
                 <div className={classes.App}>
-<<<<<<< Updated upstream
-                    <WinningResult time={1.5} showLosing={true} />
-=======
                     <WinningResult time={2} showLosing={true} />
->>>>>>> Stashed changes
                     <button
                         className={[classes.Home, classes.Btn].join(' ')}
                         onClick={() => setState(PageView.HOME)}
